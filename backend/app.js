@@ -13,6 +13,8 @@ const YAML = require('yamljs');
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.set('trust proxy' , 1);
+
 // Security Middleware
 app.use(helmet()); 
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
@@ -33,8 +35,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false, // true for 465, false for other ports
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
 });
 
