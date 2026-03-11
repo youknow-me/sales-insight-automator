@@ -33,11 +33,11 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Setup AI and Email Clients
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    // host: process.env.SMTP_HOST,
-    // port: 465,
-    // secure: true, // true for 465, false for other ports
+const transporter = nodemailer.createTransport({    
+    host: process.env.SMTP_HOST,
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    family: 4,
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
 });
 
